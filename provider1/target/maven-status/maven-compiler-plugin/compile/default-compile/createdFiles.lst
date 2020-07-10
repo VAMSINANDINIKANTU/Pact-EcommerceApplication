@@ -1,0 +1,11 @@
+com\test\provider1\model\po\ProductsPO.class
+com\test\provider1\repository\ManufacturerRepository.class
+com\test\provider1\repository\ProductsRepository.class
+com\test\provider1\model\vo\ManufacturerJson.class
+com\test\provider1\EcommerceApplication.class
+com\test\provider1\controller\EcommerceController.class
+com\test\provider1\model\vo\ManufacturerVO.class
+com\test\provider1\model\po\ManufacturerPO.class
+com\test\provider1\model\mapper\Mapper.class
+com\test\provider1\model\vo\ProductsVO.class
+com\test\provider1\service\EcommerceService.class

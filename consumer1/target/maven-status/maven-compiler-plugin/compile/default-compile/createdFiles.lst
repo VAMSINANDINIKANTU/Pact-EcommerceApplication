@@ -1,0 +1,8 @@
+com\test\consumer1\ProductConsumerApplication.class
+com\test\consumer1\configuration\MyConfig.class
+com\test\consumer1\controller\dto\ManufacturerVO.class
+com\test\consumer1\controller\dto\ProductsVO.class
+com\test\consumer1\controller\ProductConsumerController.class
+com\test\consumer1\controller\dto\Manufacturer.class
+com\test\consumer1\services\connector\Provider1Connector.class
+com\test\consumer1\services1\ProductConsumerService.class

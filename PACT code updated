@@ -1,0 +1,328 @@
+package nl.ing.closeaccount.integration.service;
+
+import au.com.dius.pact.consumer.dsl.PactDslJsonBody;
+import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
+import au.com.dius.pact.consumer.junit.PactProviderRule;
+import au.com.dius.pact.consumer.junit.PactVerification;
+import au.com.dius.pact.core.model.RequestResponsePact;
+import au.com.dius.pact.core.model.annotations.Pact;
+import com.google.common.collect.ImmutableList;
+import com.ing.api.trust.exception.SignException;
+import com.ing.api.trust.jwt.p2p.DefaultPeerToPeerTrustTokenBuilder;
+import com.ing.api.trust.jwt.p2p.PeerToPeerTrustToken;
+import com.ing.api.trust.jwt.p2p.PeerToPeerTrustTokenBuilder;
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
+import junit.framework.Assert;
+import org.junit.Ignore;
+import org.junit.Rule;
+import org.junit.Test;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.*;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
+import org.hamcrest.*;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+//import com.ing.bakercatalogue.productmanagement.packagemanagement.PackageAgreementManagementAPIConnector;
+//import com.ing.bakercatalogue.util.HttpUtils;
+public class ClosePackagePact {
+    PactDslJsonBody requestBody;
+    String  token;
+
+
+
+    @Rule
+    public PactProviderRule mockProvider = new PactProviderRule("PackageManagementAPI", "localhost", 8080, this);
+
+    @Pact(provider = "PackageManagementAPI", consumer = "pCloseAccountAPI")
+    public RequestResponsePact createPact(PactDslWithProvider builder) throws  Exception {
+
+        System.out.println("test in progress");
+        PeerToPeerTrustTokenBuilder tokenBuilder = DefaultPeerToPeerTrustTokenBuilder.createTokenBuilder();
+        System.out.println(tokenBuilder.createAccessToken("PackageManagementAPI", "PackageManagementAPI", "", ImmutableList.of()).serialize());
+        token = tokenBuilder.createAccessToken("PackageManagementAPI", "PackageManagementAPI", "", ImmutableList.of()).serialize();
+
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Content-Type", "application/json");
+        headers.put("X-ING-REQ-CTX", "P2P-token");
+        //headers.put("Accept", "application/json");
+        headers.put("X-XSRF-TOKEN", token);
+        headers.put("Cookie", "XSRF-TOKEN="+token);
+
+
+         requestBody = new PactDslJsonBody()
+                .stringValue("accountNumber", "NL")
+                .stringValue("Iban","Iban")
+                .stringValue("ChannelCode","Channelcode")
+                .stringValue("requestorRBG","RBG");
+
+
+        /*PactDslJsonBody responseBody = new PactDslJsonBody()
+                .stringValue("status", "Success")
+                .uuid("internalRequestId");*/
+
+        // return builder
+
+        return builder.
+                uponReceiving("Creating a new request for the PackageManagementAPI")
+                .path("/api/packages/for-closing")
+                .method("POST")
+                .body(requestBody)
+                .headers(headers)
+                .willRespondWith()
+                .status(201)
+                .toPact();
+    }
+
+    @Test
+    @Ignore
+    @PactVerification(fragment = "createPact")
+    public void replaceP2PToken() throws SignException {
+        System.out.println("test in progress");
+        PeerToPeerTrustTokenBuilder tokenBuilder = DefaultPeerToPeerTrustTokenBuilder.createTokenBuilder();
+        System.out.println(tokenBuilder.createAccessToken("PackageManagementAPI", "PackageManagementAPI", "", ImmutableList.of()).serialize());
+        token = tokenBuilder.createAccessToken("PackageManagementAPI", "PackageManagementAPI", "", ImmutableList.of()).serialize();
+    }
+
+    @Test
+    @PactVerification(fragment = "createPact")
+    public void givenGet_whenSendRequest_shouldReturn200WithProperHeaderAndBody() {
+        //HttpHeaders httpHeaders = new HttpHeaders();
+        MultiValueMap<String, String> httpHeaders = new LinkedMultiValueMap<>();
+        //httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        httpHeaders.put("Content-Type", Collections.singletonList("application/json"));
+        httpHeaders.put("X-ING-REQ-CTX", Collections.singletonList("P2P-token"));
+        //headers.put("Accept", "application/json");
+        httpHeaders.put("X-XSRF-TOKEN", Collections.singletonList(token));
+        httpHeaders.put("Cookie", Collections.singletonList("XSRF-TOKEN="+token));
+
+        String jsonBody = requestBody.toString();
+        System.out.println(jsonBody);
+
+
+        // when
+        ResponseEntity<String> postResponse = new RestTemplate()
+                .exchange(
+                        mockProvider.getUrl() + "/api/packages/for-closing",
+                        HttpMethod.POST,
+                        new HttpEntity<>(jsonBody, httpHeaders),
+                        String.class
+           );
+
+
+
+        assertThat(" Status code validation",postResponse.getStatusCode().value(),equalTo(201));
+               
+}}
+    /*public void test() throws IOException {
+
+        Assert.assertTrue(true);
+    }*/
+
+
+
+
+
+    /*@Test
+    @Ignore
+    @PactVerification(value = "PackageManagementAPI")
+    public void runTest() throws Exception {
+
+        Config config = ConfigFactory.parseFile(new File(new ClassPathResource("application.conf").getURL().toURI()));
+
+        PeerToPeerTrustTokenBuilder mockTokenBuilder = mock(PeerToPeerTrustTokenBuilder.class);
+        PeerToPeerTrustToken mockToken = mock(PeerToPeerTrustToken.class);
+        when(mockTokenBuilder.createAccessToken(anyString(), anyString(), anyString(), anyObject()))
+                .thenReturn(mockToken);
+        when(mockToken.serialize()).thenReturn("P2P-token");*/
+    //}}*/
+
+        /*final Service<Request, Response> service = packageAgreementAPIClient(config, mockTokenBuilder, "PackageManagementAPI");
+
+        PackageAgreementManagementAPIConnector connector = new PackageAgreementManagementAPIConnector(service, "/api/packages/for-closing/", "/for-opening", "/for-updating", "/keepalive");
+
+        RIAFBaseApplication riafBaseApplication = mock(RIAFBaseApplication.class);
+        when(riafBaseApplication.getApplicationId()).thenReturn("522");
+
+        ClosePackageAgreement closePackageAgreement = new ClosePackageAgreementImpl(connector);
+*/
+        //Test individual
+        //ClosePackageAgreementEvents.ClosePackagesAgreementOutcome response = closePackageAgreement.apply("NL");
+        //assertThat(response, instanceOf(ClosePackageAgreementEvents.ClosePackagesAgreementSuccessful.class));*/
+    //}
+//
+//
+//    Service<Request, Response> packageAgreementAPIClient(Config config, PeerToPeerTrustTokenBuilder tokenBuilder,
+//                                                         String applicationName) {
+//        // For this API the applicationName must be uppercase because we expect it this way
+//        final Peer2PeerTrustFilter peer2PeerTrustFilter = Peer2PeerTrustFilter.create(tokenBuilder, applicationName.toUpperCase(Locale.ENGLISH));
+//        return peer2PeerTrustFilter
+//                .andThen(HttpUtils.enrichWithDummyXsrfHeadersFilter())
+//                .andThen(HttpUtils.httpClient(config, "PackageManagementAPI"));
+//    }  }
+//*/
+//}
+
+
+
+
+
+
+
+
+/*
+package nl.ing.closeaccount.integration.service;
+
+import com.ing.api.toolkit.http.filter.Peer2PeerTrustFilter;
+import com.ing.api.trust.jwt.p2p.PeerToPeerTrustToken;
+import com.ing.api.trust.jwt.p2p.PeerToPeerTrustTokenBuilder;
+import com.ing.bakercatalogue.productmanagement.packagemanagement.close.ClosePackageAgreement;
+import com.ing.bakercatalogue.productmanagement.packagemanagement.close.ClosePackageAgreementEvents;
+import com.ing.bakercatalogue.productmanagement.packagemanagement.close.ClosePackageAgreementImpl;
+import com.twitter.finagle.Service;
+import com.twitter.finagle.http.Request;
+import com.twitter.finagle.http.Response;
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
+import nl.ing.riaf.core.RIAFBaseApplication;
+import org.junit.Rule;
+import org.junit.Test;
+import org.springframework.core.io.ClassPathResource;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+
+import static org.hamcrest.core.IsInstanceOf.instanceOf;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+
+
+        import au.com.dius.pact.consumer.dsl.PactDslJsonBody;
+        import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
+        import au.com.dius.pact.consumer.junit.PactProviderRule;
+        import au.com.dius.pact.consumer.junit.PactVerification;
+        import au.com.dius.pact.core.model.RequestResponsePact;
+        import au.com.dius.pact.core.model.annotations.Pact;
+        import com.ing.api.toolkit.http.filter.Peer2PeerTrustFilter;
+        import com.ing.api.trust.jwt.p2p.PeerToPeerTrustToken;
+        import com.ing.api.trust.jwt.p2p.PeerToPeerTrustTokenBuilder;
+        import com.ing.bakercatalogue.productmanagement.packagemanagement.PackageAgreementManagementAPIConnector;
+        import com.ing.bakercatalogue.productmanagement.packagemanagement.close.ClosePackageAgreement;
+        import com.ing.bakercatalogue.productmanagement.packagemanagement.close.ClosePackageAgreementEvents;
+        import com.ing.bakercatalogue.productmanagement.packagemanagement.close.ClosePackageAgreementImpl;
+        import com.ing.bakercatalogue.sols.accountrequestdatabase.AccountRequestEvents.AddAccountRequestSuccessful;
+        import com.ing.bakercatalogue.util.HttpUtils;
+        import com.twitter.finagle.Service;
+        import com.twitter.finagle.http.Request;
+        import com.twitter.finagle.http.Response;
+        import com.typesafe.config.Config;
+        import com.typesafe.config.ConfigFactory;
+        import nl.ing.riaf.core.RIAFBaseApplication;
+        import org.junit.Rule;
+        import org.junit.Test;
+        import org.springframework.core.io.ClassPathResource;
+
+        import java.io.File;
+        import java.util.HashMap;
+        import java.util.Locale;
+        import java.util.Map;
+
+        import static org.hamcrest.core.IsInstanceOf.instanceOf;
+        import static org.junit.Assert.assertThat;
+        import static org.mockito.Matchers.anyObject;
+        import static org.mockito.Matchers.anyString;
+        import static org.mockito.Mockito.mock;
+        import static org.mockito.Mockito.when;
+
+
+public class ClosePackagePact {
+
+    @Rule
+    public PactProviderRule mockProvider = new PactProviderRule("PackageManagementAPI", "localhost", 8080, this);
+
+    @Pact(provider = "PackageManagementAPI", consumer = "pCloseAccountAPI")
+    public RequestResponsePact createPact(PactDslWithProvider builder) {
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("X-ING-REQ-CTX", "P2P-token");
+        headers.put("Content-Type", "application/json");
+//        headers.put("Accept", "application/json");
+        headers.put("X-XSRF-TOKEN", "abcd");
+        headers.put("Cookie", "XSRF-TOKEN=abcd");
+
+        PactDslJsonBody requestBody = new PactDslJsonBody()
+                .stringValue("accountNumber", "NL");
+
+        PactDslJsonBody responseBody = new PactDslJsonBody()
+                .stringValue("status", "Success")
+                .uuid("internalRequestId");
+
+        return builder
+                .uponReceiving("Creating a new request for the PackageManagementAPI")
+                .path("/api/packages/for-closing/")
+                .method("POST")
+                .body(requestBody)
+                .headers(headers)
+                .willRespondWith()
+                .body(responseBody)
+                .status(200)
+                .toPact();
+    }
+
+    @Test
+    @PactVerification(value = "PackageManagementAPI")
+    public void runTest() throws Exception {
+        Config config = ConfigFactory.parseFile(new File(new ClassPathResource("application.conf").getURL().toURI()));
+
+        PeerToPeerTrustTokenBuilder mockTokenBuilder = mock(PeerToPeerTrustTokenBuilder.class);
+        PeerToPeerTrustToken mockToken = mock(PeerToPeerTrustToken.class);
+        when(mockTokenBuilder.createAccessToken(anyString(), anyString(), anyString(), anyObject()))
+                .thenReturn(mockToken);
+        when(mockToken.serialize()).thenReturn("P2P-token");
+
+
+        final Service<Request, Response> service = packageAgreementAPIClient(config, mockTokenBuilder, "PackageManagementAPI");
+
+        PackageAgreementManagementAPIConnector connector = new PackageAgreementManagementAPIConnector(service, "/api/packages/for-closing/", "/for-opening", "/for-updating", "/keepalive");
+
+        RIAFBaseApplication riafBaseApplication = mock(RIAFBaseApplication.class);
+        when(riafBaseApplication.getApplicationId()).thenReturn("522");
+
+        ClosePackageAgreement closePackageAgreement = new ClosePackageAgreementImpl(connector);
+
+        //Test individual
+        ClosePackageAgreementEvents.ClosePackagesAgreementOutcome response = closePackageAgreement.apply("NL");
+        assertThat(response, instanceOf(ClosePackageAgreementEvents.ClosePackagesAgreementSuccessful.class));
+    }
+
+
+    Service<Request, Response> packageAgreementAPIClient(Config config, PeerToPeerTrustTokenBuilder tokenBuilder,
+                                                         String applicationName) {
+        // For this API the applicationName must be uppercase because we expect it this way
+        final Peer2PeerTrustFilter peer2PeerTrustFilter = Peer2PeerTrustFilter.create(tokenBuilder, applicationName.toUpperCase(Locale.ENGLISH));
+        return peer2PeerTrustFilter
+                .andThen(HttpUtils.enrichWithDummyXsrfHeadersFilter())
+                .andThen(HttpUtils.httpClient(config, "PackageManagementAPI"));
+    }
+*/
+//}
