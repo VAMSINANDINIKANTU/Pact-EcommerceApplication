@@ -1,39 +1,39 @@
 {
     "metaData": {
-        "date": "2020-07-10T13:25:16+0000",
+        "date": "2020-07-13T12:48:56+0000",
         "pactJvmVersion": "3.6.14",
         "reportFormat": "0.0.0"
     },
     "provider": {
-        "name": "EcommereceProvider"
+        "name": "ecommereceprovider"
     },
     "execution": [
         {
             "consumer": {
-                "name": "consumerpact2"
+                "name": "Myconsumer"
             },
             "interactions": [
                 {
                     "interaction": {
-                        "description": "get product list by HP",
+                        "description": "get product list by Xiaomi",
                         "request": {
                             "method": "GET",
-                            "path": "/app/manufacturers/name/HP"
+                            "path": "/app/manufacturers/name/Xiaomi"
                         },
                         "response": {
                             "status": 200,
                             "body": {
                                 "manufacturerVOs": [
                                     {
-                                        "manufacturerId": "5679",
-                                        "manufacturerName": "HP",
-                                        "manufacturerAddress": "Bangalore",
+                                        "manufacturerId": "502",
+                                        "manufacturerName": "Xiaomi",
+                                        "manufacturerAddress": "India",
                                         "productsList": [
                                             {
-                                                "productId": "1009",
-                                                "productName": "pro book",
-                                                "productType": "Laptop",
-                                                "price": 83000.0
+                                                "productId": "104",
+                                                "productName": "Redmi",
+                                                "productType": "Mobile",
+                                                "price": 10000.0
                                             }
                                         ]
                                     }
@@ -42,330 +42,7 @@
                         },
                         "providerStates": [
                             {
-                                "name": "HP"
-                            }
-                        ]
-                    },
-                    "verification": {
-                        "result": "failed",
-                        "body": {
-                            "comparison": {
-                                "$.manufacturerVOs.0.manufacturerName": [
-                                    {
-                                        "mismatch": "Expected 'HP' but received 'Hp'",
-                                        "diff": ""
-                                    }
-                                ],
-                                "$.manufacturerVOs.0.manufacturerAddress": [
-                                    {
-                                        "mismatch": "Expected 'Bangalore' but received 'Mumbai'",
-                                        "diff": ""
-                                    }
-                                ]
-                            },
-                            "diff": [
-                                "            \"manufacturerId\": \"5679\",",
-                                "-            \"manufacturerName\": \"HP\",",
-                                "-            \"manufacturerAddress\": \"Bangalore\",",
-                                "+            \"manufacturerName\": \"Hp\",",
-                                "+            \"manufacturerAddress\": \"Mumbai\",",
-                                "            \"productsList\": ["
-                            ]
-                        }
-                    }
-                }
-            ]
-        },
-        {
-            "consumer": {
-                "name": "consumerpact2"
-            },
-            "interactions": [
-                {
-                    "interaction": {
-                        "description": "get Product list by Apple",
-                        "request": {
-                            "method": "GET",
-                            "path": "/app/manufacturers/name/Apple"
-                        },
-                        "response": {
-                            "status": 200,
-                            "body": {
-                                "manufacturerVOs": [
-                                    {
-                                        "manufacturerId": "5678",
-                                        "manufacturerName": "Apple",
-                                        "manufacturerAddress": "Bangalore",
-                                        "productsList": [
-                                            {
-                                                "productId": "1007",
-                                                "productName": "Apple Mack book Pro",
-                                                "productType": "Laptop",
-                                                "price": 90000.0
-                                            },
-                                            {
-                                                "productId": "1008",
-                                                "productName": "mack book Air",
-                                                "productType": "Laptop",
-                                                "price": 75000.0
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        }
-                    },
-                    "verification": {
-                        "result": "OK"
-                    }
-                }
-            ]
-        },
-        {
-            "consumer": {
-                "name": "consumerpact3"
-            },
-            "interactions": [
-                {
-                    "interaction": {
-                        "description": "get product list by HP",
-                        "request": {
-                            "method": "GET",
-                            "path": "/app/manufacturers/name/HP"
-                        },
-                        "response": {
-                            "status": 200,
-                            "body": {
-                                "manufacturerVOs": [
-                                    {
-                                        "manufacturerId": "5679",
-                                        "manufacturerName": "Hp",
-                                        "manufacturerAddress": "Bangalore",
-                                        "productsList": [
-                                            {
-                                                "productId": "1009",
-                                                "productName": "pro book",
-                                                "productType": "Laptop",
-                                                "price": 83000.0
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        },
-                        "providerStates": [
-                            {
-                                "name": "HP"
-                            }
-                        ]
-                    },
-                    "verification": {
-                        "result": "failed",
-                        "body": {
-                            "comparison": {
-                                "$.manufacturerVOs.0.manufacturerAddress": [
-                                    {
-                                        "mismatch": "Expected 'Bangalore' but received 'Mumbai'",
-                                        "diff": ""
-                                    }
-                                ]
-                            },
-                            "diff": [
-                                "            \"manufacturerName\": \"Hp\",",
-                                "-            \"manufacturerAddress\": \"Bangalore\",",
-                                "+            \"manufacturerAddress\": \"Mumbai\",",
-                                "            \"productsList\": ["
-                            ]
-                        }
-                    }
-                }
-            ]
-        },
-        {
-            "consumer": {
-                "name": "consumerpact3"
-            },
-            "interactions": [
-                {
-                    "interaction": {
-                        "description": "get Product list by Apple",
-                        "request": {
-                            "method": "GET",
-                            "path": "/app/manufacturers/name/Apple"
-                        },
-                        "response": {
-                            "status": 200,
-                            "body": {
-                                "manufacturerVOs": [
-                                    {
-                                        "manufacturerId": "5678",
-                                        "manufacturerName": "Apple",
-                                        "manufacturerAddress": "Bangalore",
-                                        "productsList": [
-                                            {
-                                                "productId": "1007",
-                                                "productName": "Apple Mack book Pro",
-                                                "productType": "Laptop",
-                                                "price": 90000.0
-                                            },
-                                            {
-                                                "productId": "1008",
-                                                "productName": "mack book Air",
-                                                "productType": "Laptop",
-                                                "price": 75000.0
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        }
-                    },
-                    "verification": {
-                        "result": "OK"
-                    }
-                }
-            ]
-        },
-        {
-            "consumer": {
-                "name": "consumerpact3"
-            },
-            "interactions": [
-                {
-                    "interaction": {
-                        "description": "get product list by HP",
-                        "request": {
-                            "method": "GET",
-                            "path": "/app/manufacturers/name/HP"
-                        },
-                        "response": {
-                            "status": 200,
-                            "body": {
-                                "manufacturerVOs": [
-                                    {
-                                        "manufacturerId": "5679",
-                                        "manufacturerName": "Hp",
-                                        "manufacturerAddress": "Bangalore",
-                                        "productsList": [
-                                            {
-                                                "productId": "1009",
-                                                "productName": "pro book",
-                                                "productType": "Laptop",
-                                                "price": 83000.0
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        },
-                        "providerStates": [
-                            {
-                                "name": "HP"
-                            }
-                        ]
-                    },
-                    "verification": {
-                        "result": "failed",
-                        "body": {
-                            "comparison": {
-                                "$.manufacturerVOs.0.manufacturerAddress": [
-                                    {
-                                        "mismatch": "Expected 'Bangalore' but received 'Mumbai'",
-                                        "diff": ""
-                                    }
-                                ]
-                            },
-                            "diff": [
-                                "            \"manufacturerName\": \"Hp\",",
-                                "-            \"manufacturerAddress\": \"Bangalore\",",
-                                "+            \"manufacturerAddress\": \"Mumbai\",",
-                                "            \"productsList\": ["
-                            ]
-                        }
-                    }
-                }
-            ]
-        },
-        {
-            "consumer": {
-                "name": "consumerpact3"
-            },
-            "interactions": [
-                {
-                    "interaction": {
-                        "description": "get Product list by Apple",
-                        "request": {
-                            "method": "GET",
-                            "path": "/app/manufacturers/name/Apple"
-                        },
-                        "response": {
-                            "status": 200,
-                            "body": {
-                                "manufacturerVOs": [
-                                    {
-                                        "manufacturerId": "5678",
-                                        "manufacturerName": "Apple",
-                                        "manufacturerAddress": "Bangalore",
-                                        "productsList": [
-                                            {
-                                                "productId": "1007",
-                                                "productName": "Apple Mack book Pro",
-                                                "productType": "Laptop",
-                                                "price": 90000.0
-                                            },
-                                            {
-                                                "productId": "1008",
-                                                "productName": "mack book Air",
-                                                "productType": "Laptop",
-                                                "price": 75000.0
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        }
-                    },
-                    "verification": {
-                        "result": "OK"
-                    }
-                }
-            ]
-        },
-        {
-            "consumer": {
-                "name": "consumerpact4"
-            },
-            "interactions": [
-                {
-                    "interaction": {
-                        "description": "get product list by HP",
-                        "request": {
-                            "method": "GET",
-                            "path": "/app/manufacturers/name/HP"
-                        },
-                        "response": {
-                            "status": 200,
-                            "body": {
-                                "manufacturerVOs": [
-                                    {
-                                        "manufacturerId": "5679",
-                                        "manufacturerName": "Hp",
-                                        "manufacturerAddress": "Mumbai",
-                                        "productsList": [
-                                            {
-                                                "productId": "1009",
-                                                "productName": "pro book",
-                                                "productType": "Laptop",
-                                                "price": 83000.0
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        },
-                        "providerStates": [
-                            {
-                                "name": "HP"
+                                "name": "SomeState"
                             }
                         ]
                     },
@@ -377,12 +54,12 @@
         },
         {
             "consumer": {
-                "name": "consumerpact4"
+                "name": "Myconsumer"
             },
             "interactions": [
                 {
                     "interaction": {
-                        "description": "get Product list by Apple",
+                        "description": "get product list by Apple",
                         "request": {
                             "method": "GET",
                             "path": "/app/manufacturers/name/Apple"
@@ -392,21 +69,21 @@
                             "body": {
                                 "manufacturerVOs": [
                                     {
-                                        "manufacturerId": "5678",
+                                        "manufacturerId": "500",
                                         "manufacturerName": "Apple",
-                                        "manufacturerAddress": "Bangalore",
+                                        "manufacturerAddress": "US",
                                         "productsList": [
                                             {
-                                                "productId": "1007",
-                                                "productName": "Apple Mack book Pro",
-                                                "productType": "Laptop",
-                                                "price": 90000.0
+                                                "productId": "100",
+                                                "productName": "iphone",
+                                                "productType": "Mobile",
+                                                "price": 30000.0
                                             },
                                             {
-                                                "productId": "1008",
-                                                "productName": "mack book Air",
-                                                "productType": "Laptop",
-                                                "price": 75000.0
+                                                "productId": "101",
+                                                "productName": "iphone11 Pro",
+                                                "productType": "Mobile",
+                                                "price": 15000.0
                                             }
                                         ]
                                     }
@@ -422,80 +99,30 @@
         },
         {
             "consumer": {
-                "name": "consumerpact4"
+                "name": "Myconsumer"
             },
             "interactions": [
                 {
                     "interaction": {
-                        "description": "get product list by HP",
+                        "description": "get product list by Samsung",
                         "request": {
                             "method": "GET",
-                            "path": "/app/manufacturers/name/HP"
+                            "path": "/app/manufacturers/name/Samsung"
                         },
                         "response": {
                             "status": 200,
                             "body": {
                                 "manufacturerVOs": [
                                     {
-                                        "manufacturerId": "5679",
-                                        "manufacturerName": "Hp",
-                                        "manufacturerAddress": "Mumbai",
+                                        "manufacturerId": "501",
+                                        "manufacturerName": "Samsung",
+                                        "manufacturerAddress": "India",
                                         "productsList": [
                                             {
-                                                "productId": "1009",
-                                                "productName": "pro book",
-                                                "productType": "Laptop",
-                                                "price": 83000.0
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        },
-                        "providerStates": [
-                            {
-                                "name": "HP"
-                            }
-                        ]
-                    },
-                    "verification": {
-                        "result": "OK"
-                    }
-                }
-            ]
-        },
-        {
-            "consumer": {
-                "name": "consumerpact4"
-            },
-            "interactions": [
-                {
-                    "interaction": {
-                        "description": "get Product list by Apple",
-                        "request": {
-                            "method": "GET",
-                            "path": "/app/manufacturers/name/Apple"
-                        },
-                        "response": {
-                            "status": 200,
-                            "body": {
-                                "manufacturerVOs": [
-                                    {
-                                        "manufacturerId": "5678",
-                                        "manufacturerName": "Apple",
-                                        "manufacturerAddress": "Bangalore",
-                                        "productsList": [
-                                            {
-                                                "productId": "1007",
-                                                "productName": "Apple Mack book Pro",
-                                                "productType": "Laptop",
-                                                "price": 90000.0
-                                            },
-                                            {
-                                                "productId": "1008",
-                                                "productName": "mack book Air",
-                                                "productType": "Laptop",
-                                                "price": 75000.0
+                                                "productId": "102",
+                                                "productName": "Samsung",
+                                                "productType": "Mobile",
+                                                "price": 17000.0
                                             }
                                         ]
                                     }
@@ -511,30 +138,114 @@
         },
         {
             "consumer": {
-                "name": "consumerpact4"
+                "name": "myconsumerpact"
             },
             "interactions": [
                 {
                     "interaction": {
-                        "description": "get product list by HP",
+                        "description": "get product list by Apple",
                         "request": {
                             "method": "GET",
-                            "path": "/app/manufacturers/name/HP"
+                            "path": "/app/manufacturers/name/Apple"
                         },
                         "response": {
                             "status": 200,
                             "body": {
                                 "manufacturerVOs": [
                                     {
-                                        "manufacturerId": "5679",
-                                        "manufacturerName": "Hp",
-                                        "manufacturerAddress": "Mumbai",
+                                        "manufacturerId": "500",
+                                        "manufacturerName": "Apple",
+                                        "manufacturerAddress": "US",
                                         "productsList": [
                                             {
-                                                "productId": "1009",
-                                                "productName": "pro book",
-                                                "productType": "Laptop",
-                                                "price": 83000.0
+                                                "productId": "100",
+                                                "productName": "iphone",
+                                                "productType": "Mobile",
+                                                "price": 30000.0
+                                            },
+                                            {
+                                                "productId": "101",
+                                                "productName": "iphone11 Pro",
+                                                "productType": "Mobile",
+                                                "price": 15000.0
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "verification": {
+                        "result": "OK"
+                    }
+                }
+            ]
+        },
+        {
+            "consumer": {
+                "name": "myconsumerpact"
+            },
+            "interactions": [
+                {
+                    "interaction": {
+                        "description": "get product list by Samsung",
+                        "request": {
+                            "method": "GET",
+                            "path": "/app/manufacturers/name/Samsung"
+                        },
+                        "response": {
+                            "status": 200,
+                            "body": {
+                                "manufacturerVOs": [
+                                    {
+                                        "manufacturerId": "501",
+                                        "manufacturerName": "Samsung",
+                                        "manufacturerAddress": "India",
+                                        "productsList": [
+                                            {
+                                                "productId": "102",
+                                                "productName": "Samsung",
+                                                "productType": "Mobile",
+                                                "price": 17000.0
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "verification": {
+                        "result": "OK"
+                    }
+                }
+            ]
+        },
+        {
+            "consumer": {
+                "name": "myconsumerpact"
+            },
+            "interactions": [
+                {
+                    "interaction": {
+                        "description": "get product list by Xiaomi",
+                        "request": {
+                            "method": "GET",
+                            "path": "/app/manufacturers/name/Xiaomi"
+                        },
+                        "response": {
+                            "status": 200,
+                            "body": {
+                                "manufacturerVOs": [
+                                    {
+                                        "manufacturerId": "502",
+                                        "manufacturerName": "Xiaomi",
+                                        "manufacturerAddress": "India",
+                                        "productsList": [
+                                            {
+                                                "productId": "104",
+                                                "productName": "Redmi",
+                                                "productType": "Mobile",
+                                                "price": 10000.0
                                             }
                                         ]
                                     }
@@ -543,7 +254,7 @@
                         },
                         "providerStates": [
                             {
-                                "name": "HP"
+                                "name": "SomeState"
                             }
                         ]
                     },
@@ -555,12 +266,12 @@
         },
         {
             "consumer": {
-                "name": "consumerpact4"
+                "name": "myconsumerpact"
             },
             "interactions": [
                 {
                     "interaction": {
-                        "description": "get Product list by Apple",
+                        "description": "get product list by Apple",
                         "request": {
                             "method": "GET",
                             "path": "/app/manufacturers/name/Apple"
@@ -570,21 +281,188 @@
                             "body": {
                                 "manufacturerVOs": [
                                     {
-                                        "manufacturerId": "5678",
+                                        "manufacturerId": "500",
                                         "manufacturerName": "Apple",
-                                        "manufacturerAddress": "Bangalore",
+                                        "manufacturerAddress": "US",
                                         "productsList": [
                                             {
-                                                "productId": "1007",
-                                                "productName": "Apple Mack book Pro",
-                                                "productType": "Laptop",
-                                                "price": 90000.0
+                                                "productId": "100",
+                                                "productName": "iphone",
+                                                "productType": "Mobile",
+                                                "price": 30000.0
                                             },
                                             {
-                                                "productId": "1008",
-                                                "productName": "mack book Air",
-                                                "productType": "Laptop",
-                                                "price": 75000.0
+                                                "productId": "101",
+                                                "productName": "iphone11 Pro",
+                                                "productType": "Mobile",
+                                                "price": 15000.0
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "verification": {
+                        "result": "OK"
+                    }
+                }
+            ]
+        },
+        {
+            "consumer": {
+                "name": "myconsumerpact"
+            },
+            "interactions": [
+                {
+                    "interaction": {
+                        "description": "get product list by Samsung",
+                        "request": {
+                            "method": "GET",
+                            "path": "/app/manufacturers/name/Samsung"
+                        },
+                        "response": {
+                            "status": 200,
+                            "body": {
+                                "manufacturerVOs": [
+                                    {
+                                        "manufacturerId": "501",
+                                        "manufacturerName": "Samsung",
+                                        "manufacturerAddress": "India",
+                                        "productsList": [
+                                            {
+                                                "productId": "102",
+                                                "productName": "Samsung",
+                                                "productType": "Mobile",
+                                                "price": 17000.0
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "verification": {
+                        "result": "OK"
+                    }
+                }
+            ]
+        },
+        {
+            "consumer": {
+                "name": "myconsumerpact"
+            },
+            "interactions": [
+                {
+                    "interaction": {
+                        "description": "get product list by Xiaomi",
+                        "request": {
+                            "method": "GET",
+                            "path": "/app/manufacturers/name/Xiaomi"
+                        },
+                        "response": {
+                            "status": 200,
+                            "body": {
+                                "manufacturerVOs": [
+                                    {
+                                        "manufacturerId": "502",
+                                        "manufacturerName": "Xiaomi",
+                                        "manufacturerAddress": "India",
+                                        "productsList": [
+                                            {
+                                                "productId": "104",
+                                                "productName": "Redmi",
+                                                "productType": "Mobile",
+                                                "price": 10000.0
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        "providerStates": [
+                            {
+                                "name": "SomeState"
+                            }
+                        ]
+                    },
+                    "verification": {
+                        "result": "OK"
+                    }
+                }
+            ]
+        },
+        {
+            "consumer": {
+                "name": "myconsumerpact"
+            },
+            "interactions": [
+                {
+                    "interaction": {
+                        "description": "get product list by Apple",
+                        "request": {
+                            "method": "GET",
+                            "path": "/app/manufacturers/name/Apple"
+                        },
+                        "response": {
+                            "status": 200,
+                            "body": {
+                                "manufacturerVOs": [
+                                    {
+                                        "manufacturerId": "500",
+                                        "manufacturerName": "Apple",
+                                        "manufacturerAddress": "US",
+                                        "productsList": [
+                                            {
+                                                "productId": "100",
+                                                "productName": "iphone",
+                                                "productType": "Mobile",
+                                                "price": 30000.0
+                                            },
+                                            {
+                                                "productId": "101",
+                                                "productName": "iphone11 Pro",
+                                                "productType": "Mobile",
+                                                "price": 15000.0
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "verification": {
+                        "result": "OK"
+                    }
+                }
+            ]
+        },
+        {
+            "consumer": {
+                "name": "myconsumerpact"
+            },
+            "interactions": [
+                {
+                    "interaction": {
+                        "description": "get product list by Samsung",
+                        "request": {
+                            "method": "GET",
+                            "path": "/app/manufacturers/name/Samsung"
+                        },
+                        "response": {
+                            "status": 200,
+                            "body": {
+                                "manufacturerVOs": [
+                                    {
+                                        "manufacturerId": "501",
+                                        "manufacturerName": "Samsung",
+                                        "manufacturerAddress": "India",
+                                        "productsList": [
+                                            {
+                                                "productId": "102",
+                                                "productName": "Samsung",
+                                                "productType": "Mobile",
+                                                "price": 17000.0
                                             }
                                         ]
                                     }

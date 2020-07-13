@@ -1,36 +1,22 @@
 package com.test.provider1.model.vo;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductsVO {
-
 	private String productId;
-
 	private String productName;
-
 	private String productType;
-
 	private double price;
-	
 	private String manufacturerId;
-	
 	private String manufacturerName;
-	
 	private String manufacturerAddress;
-
-	public ProductsVO() {
+    public ProductsVO() {
 	}
-
-	public ProductsVO(String productId, 
-			String productName, 
-			String productType, 
-			String manufacturerId, 
-			double price,
-			String manufacturerName,
-			String manufacturerAddress) {
+    
+    public ProductsVO(String productId, String productName, String productType, String manufacturerId, double price,String manufacturerName,
+		String manufacturerAddress) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
@@ -96,5 +82,4 @@ public class ProductsVO {
 	public void setManufacturerAddress(String manufacturerAddress) {
 		this.manufacturerAddress = manufacturerAddress;
 	}
-	
 }

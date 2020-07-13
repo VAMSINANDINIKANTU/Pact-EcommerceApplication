@@ -20,7 +20,6 @@ public class ProductConsumerController {
 	public ResponseEntity<Manufacturer> getProdList(@PathVariable String manufacturername) throws IOException {
 		System.out.println("Inside getproductlist(): start: " + manufacturername);
 		return productConsumerService.getProductList(manufacturername).map(ResponseEntity::ok)
-				.orElse(ResponseEntity.notFound().build());
+		.orElse(ResponseEntity.notFound().build());
 	}
-
 }

@@ -1,41 +1,29 @@
 package com.test.provider1.model.po;
-
 import java.io.Serializable;
 import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "manufacturer")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class ManufacturerPO implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-
-	@Id
+    private static final long serialVersionUID = 1L;
+    @Id
 	private String manufacturerId;
+    private String manufacturerName;
+    private String manufacturerAddress;
 
-	private String manufacturerName;
-
-	private String manufacturerAddress;
-	
 	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "manufacturerId", referencedColumnName ="manufacturerId", insertable = false, updatable = false)
+	@JoinColumn(name = "manufacturerId", referencedColumnName = "manufacturerId", insertable = false, updatable = false)
 	private List<ProductsPO> products;
-    
-	public ManufacturerPO() {}
-
-	public ManufacturerPO(String manufacturerId, 
-			String manufacturerName, 
-			String manufacturerAddress,
-			List<ProductsPO> products) {
+    public ManufacturerPO(String manufacturerId, String manufacturerName, String manufacturerAddress,
+		List<ProductsPO> products) {
 		super();
 		this.manufacturerId = manufacturerId;
 		this.manufacturerName = manufacturerName;
@@ -63,6 +51,12 @@ public class ManufacturerPO implements Serializable {
 		return manufacturerAddress;
 	}
 
+	@Override
+	public String toString() {
+		return "ManufacturerPO [manufacturerId=" + manufacturerId + ", manufacturerName=" + manufacturerName
+				+ ", manufacturerAddress=" + manufacturerAddress + ", products=" + products + "]";
+	}
+
 	public void setManufacturerAddress(String manufacturerAddress) {
 		this.manufacturerAddress = manufacturerAddress;
 	}
@@ -75,4 +69,12 @@ public class ManufacturerPO implements Serializable {
 		this.products = products;
 	}
 
+	public Object getProductsPO() {
+
+		return null;
+	}
+
+	public ManufacturerPO() {
+		super();
+	}
 }

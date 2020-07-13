@@ -64,7 +64,7 @@
 				<groupId>au.com.dius</groupId>
 				<artifactId>pact-jvm-provider-maven</artifactId>
 				<version>4.0.0</version>
-			
+
 				<configuration>
 					<pactBrokerUrl>${pactBrokerUrl}</pactBrokerUrl>
 					<trimSnapshot>true</trimSnapshot> <!-- Defaults to false -->

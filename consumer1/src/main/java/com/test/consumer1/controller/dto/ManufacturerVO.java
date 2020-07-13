@@ -1,30 +1,19 @@
 package com.test.consumer1.controller.dto;
-
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ManufacturerVO {
-
-	private String manufacturerId;
-
-	private String manufacturerName;
-
-	private String manufacturerAddress;
-	
+    private String manufacturerId;
+    private String manufacturerName;
+    private String manufacturerAddress;
 	private List<ProductsVO> productsList;
-
-	public ManufacturerVO() {
+    public ManufacturerVO() {
+    	
 	}
-
-	public ManufacturerVO(String manufacturerId, 
-			String manufacturerName, 
-			
-			String manufacturerAddress,
-			List<ProductsVO> productVOList) {
+    public ManufacturerVO(String manufacturerId, String manufacturerName, String manufacturerAddress,List<ProductsVO> productVOList) {
 		super();
 		this.manufacturerId = manufacturerId;
 		this.manufacturerName = manufacturerName;
@@ -63,5 +52,4 @@ public class ManufacturerVO {
 	public void setProductsList(List<ProductsVO> productsList) {
 		this.productsList = productsList;
 	}	
-	
 }

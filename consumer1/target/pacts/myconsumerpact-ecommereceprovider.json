@@ -1,0 +1,110 @@
+{
+    "provider": {
+        "name": "ecommereceprovider"
+    },
+    "consumer": {
+        "name": "myconsumerpact"
+    },
+    "interactions": [
+        {
+            "description": "get product list by Xiaomi",
+            "request": {
+                "method": "GET",
+                "path": "/app/manufacturers/name/Xiaomi"
+            },
+            "response": {
+                "status": 200,
+                "body": {
+                    "manufacturerVOs": [
+                        {
+                            "manufacturerId": "502",
+                            "manufacturerName": "Xiaomi",
+                            "manufacturerAddress": "India",
+                            "productsList": [
+                                {
+                                    "productId": "104",
+                                    "productName": "Redmi",
+                                    "productType": "Mobile",
+                                    "price": 10000.0
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "providerStates": [
+                {
+                    "name": "SomeState"
+                }
+            ]
+        },
+        {
+            "description": "get product list by Apple",
+            "request": {
+                "method": "GET",
+                "path": "/app/manufacturers/name/Apple"
+            },
+            "response": {
+                "status": 200,
+                "body": {
+                    "manufacturerVOs": [
+                        {
+                            "manufacturerId": "500",
+                            "manufacturerName": "Apple",
+                            "manufacturerAddress": "US",
+                            "productsList": [
+                                {
+                                    "productId": "100",
+                                    "productName": "iphone",
+                                    "productType": "Mobile",
+                                    "price": 30000.0
+                                },
+                                {
+                                    "productId": "101",
+                                    "productName": "iphone11 Pro",
+                                    "productType": "Mobile",
+                                    "price": 15000.0
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "description": "get product list by Samsung",
+            "request": {
+                "method": "GET",
+                "path": "/app/manufacturers/name/Samsung"
+            },
+            "response": {
+                "status": 200,
+                "body": {
+                    "manufacturerVOs": [
+                        {
+                            "manufacturerId": "501",
+                            "manufacturerName": "Samsung",
+                            "manufacturerAddress": "India",
+                            "productsList": [
+                                {
+                                    "productId": "102",
+                                    "productName": "Samsung",
+                                    "productType": "Mobile",
+                                    "price": 17000.0
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "metadata": {
+        "pact-specification": {
+            "version": "3.0.0"
+        },
+        "pact-jvm": {
+            "version": "3.5.14"
+        }
+    }
+}

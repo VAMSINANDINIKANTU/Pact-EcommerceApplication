@@ -1,8 +1,6 @@
 package com.test.provider1.model.mapper;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import com.test.provider1.model.po.ManufacturerPO;
 import com.test.provider1.model.po.ProductsPO;
 import com.test.provider1.model.vo.ManufacturerVO;
@@ -19,7 +17,6 @@ public class Mapper {
 		productVO.setManufacturerId(manufacturerPO.getManufacturerId());
 		productVO.setManufacturerName(manufacturerPO.getManufacturerName());
 		productVO.setManufacturerAddress(manufacturerPO.getManufacturerAddress());
-		
 		return productVO;
 	}
 	
@@ -39,8 +36,6 @@ public class Mapper {
 			productVOList.add(productVO);
 		}
 		manufacturerVO.setProductsList(productVOList);
-		
 		return manufacturerVO;
 	}
-	
 }
