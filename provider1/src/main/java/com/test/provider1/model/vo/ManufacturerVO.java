@@ -10,10 +10,10 @@ public class ManufacturerVO {
 	private String manufacturerName;
 	private String manufacturerAddress;
 	private List<ProductsVO> productsList;
-    public ManufacturerVO() {
+        public ManufacturerVO() {
 	}
     
-    public ManufacturerVO(String manufacturerId, String manufacturerName, String manufacturerAddress,List<ProductsVO> productVOList) {
+        public ManufacturerVO(String manufacturerId, String manufacturerName, String manufacturerAddress,List<ProductsVO> productVOList) {
 		super();
 		this.manufacturerId = manufacturerId;
 		this.manufacturerName = manufacturerName;
