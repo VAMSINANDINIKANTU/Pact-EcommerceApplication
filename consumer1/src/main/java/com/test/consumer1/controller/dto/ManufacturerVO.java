@@ -6,14 +6,14 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ManufacturerVO {
-    private String manufacturerId;
-    private String manufacturerName;
-    private String manufacturerAddress;
-	private List<ProductsVO> productsList;
-    public ManufacturerVO() {
+       private String manufacturerId;
+       private String manufacturerName;
+       private String manufacturerAddress;
+       private List<ProductsVO> productsList;
+       public ManufacturerVO() {
     	
-	}
-    public ManufacturerVO(String manufacturerId, String manufacturerName, String manufacturerAddress,List<ProductsVO> productVOList) {
+       }
+       public ManufacturerVO(String manufacturerId, String manufacturerName, String manufacturerAddress,List<ProductsVO> productVOList) {
 		super();
 		this.manufacturerId = manufacturerId;
 		this.manufacturerName = manufacturerName;
