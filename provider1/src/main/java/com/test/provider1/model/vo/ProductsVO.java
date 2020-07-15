@@ -12,10 +12,10 @@ public class ProductsVO {
 	private String manufacturerId;
 	private String manufacturerName;
 	private String manufacturerAddress;
-    public ProductsVO() {
+        public ProductsVO() {
 	}
     
-    public ProductsVO(String productId, String productName, String productType, String manufacturerId, double price,String manufacturerName,
+       public ProductsVO(String productId, String productName, String productType, String manufacturerId, double price,String manufacturerName,
 		String manufacturerAddress) {
 		super();
 		this.productId = productId;
