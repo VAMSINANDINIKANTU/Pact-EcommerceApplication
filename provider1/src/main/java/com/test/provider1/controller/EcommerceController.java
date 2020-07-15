@@ -1,4 +1,5 @@
 package com.test.provider1.controller;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import com.test.provider1.model.po.ManufacturerPO;
 import com.test.provider1.model.po.ProductsPO;
 import com.test.provider1.model.vo.ManufacturerJson;
 import com.test.provider1.model.vo.ManufacturerVO;
+import com.test.provider1.model.vo.ProductsJson;
 import com.test.provider1.model.vo.ProductsVO;
 import com.test.provider1.service.EcommerceService;
 
@@ -43,28 +45,16 @@ public class EcommerceController {
 		return productsList;
 	}
 
-	@RequestMapping("/products/{prodid}")
-	public ProductsVO getProductDetailsByID(@PathVariable String prodid) {
-		ProductsVO productVO = ecommerceService.getProductDetailsByID(prodid);
-		return productVO;
-	}
-
 	@GetMapping("/products/type/{prodtype}")
 	public List<ProductsVO> getProductDetailsByType(@PathVariable String prodtype) {
 		List<ProductsVO> productsList = ecommerceService.getProductDetailsByType(prodtype);
 		return productsList;
 	}
 
-	@RequestMapping("/products/name/{prodname}")
-	public List<ProductsVO> getProductDetailsByName(@PathVariable String prodname) {
-		List<ProductsVO> productsList = ecommerceService.getProductDetailsByName(prodname);
-		return productsList;
-	}
-
 	@RequestMapping(method = RequestMethod.POST, path = "/manufacturers")
 	public void addManfacture(@RequestBody List<ManufacturerPO> manufacturer) {
 		ecommerceService.postaddManu(manufacturer);
-		}
+	}
 
 	@RequestMapping("/manufacturers")
 	public List<ManufacturerVO> getAllManufacturers() {
@@ -84,6 +74,27 @@ public class EcommerceController {
 		ManufacturerJson manufacturerJson = new ManufacturerJson();
 		manufacturerJson.setManufacturerVOs(manufacturerList);
 		return manufacturerJson;
+	}
+
+	@RequestMapping("/products/name/{prodname}")
+	public ProductsJson getProductDetailsByName(@PathVariable String prodname) {
+		List<ProductsVO> productsList = ecommerceService.getProductDetailsByName(prodname);
+
+		ProductsJson productsJson = new ProductsJson();
+		productsJson.setProductsVOs(productsList);
+		return productsJson;
+
+		// return productsList;
+	}
+
+	@RequestMapping("/products/{prodid}")
+	public ProductsJson getProductDetailsByID(@PathVariable String prodid) {
+		List<ProductsVO> productsList = ecommerceService.getProductDetailsByID(prodid);
+		ProductsJson productsJson = new ProductsJson();
+		productsJson.setProductsVOs(productsList);
+		return productsJson;
+
+		// return productVO;
 	}
 
 	@RequestMapping(method = RequestMethod.POST, path = "/product")

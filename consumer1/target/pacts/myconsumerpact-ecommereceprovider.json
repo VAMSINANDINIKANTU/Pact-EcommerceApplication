@@ -7,6 +7,34 @@
     },
     "interactions": [
         {
+            "description": "get product list by productid 105",
+            "request": {
+                "method": "GET",
+                "path": "/app/products/105"
+            },
+            "response": {
+                "status": 200,
+                "body": {
+                    "productsVOs": [
+                        {
+                            "productId": "105",
+                            "productName": "Oppo Reno Pro",
+                            "productType": "Mobile",
+                            "price": 14000.0,
+                            "manufacturerId": "504",
+                            "manufacturerName": "Oppo",
+                            "manufacturerAddress": "Uk"
+                        }
+                    ]
+                }
+            },
+            "providerStates": [
+                {
+                    "name": "Oppo"
+                }
+            ]
+        },
+        {
             "description": "get product list by Xiaomi",
             "request": {
                 "method": "GET",
@@ -93,6 +121,29 @@
                                     "price": 17000.0
                                 }
                             ]
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "description": "get product list by productid 102",
+            "request": {
+                "method": "GET",
+                "path": "/app/products/102"
+            },
+            "response": {
+                "status": 200,
+                "body": {
+                    "productsVOs": [
+                        {
+                            "productId": "102",
+                            "productName": "Samsung",
+                            "productType": "Mobile",
+                            "price": 17000.0,
+                            "manufacturerId": "501",
+                            "manufacturerName": "Samsung",
+                            "manufacturerAddress": "India"
                         }
                     ]
                 }

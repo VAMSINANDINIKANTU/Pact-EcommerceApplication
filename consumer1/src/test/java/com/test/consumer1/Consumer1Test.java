@@ -53,13 +53,11 @@ public class Consumer1Test {
 	}
 
 	@Pact(consumer = "myconsumerpact") // will default to the provider name from mockProvider in Rule
-    public RequestResponsePact defineExpectationWithState(PactDslWithProvider builder) {
+	public RequestResponsePact defineExpectationWithState(PactDslWithProvider builder) {
 
-	    return builder.uponReceiving("get product list by Samsung")
-        .path("/app/manufacturers/name/Samsung")
-        .method("GET").willRespondWith()
-        .status(200)
-        .body("{\n" + "    \"manufacturerVOs\": [\n" + "        {\n"
+		return builder.uponReceiving("get product list by Samsung").path("/app/manufacturers/name/Samsung")
+				.method("GET").willRespondWith().status(200)
+				.body("{\n" + "    \"manufacturerVOs\": [\n" + "        {\n"
 						+ "            \"manufacturerId\": \"501\",\n"
 						+ "            \"manufacturerName\": \"Samsung\",\n"
 						+ "            \"manufacturerAddress\": \"India\",\n" + "            \"productsList\": [\n"
@@ -69,17 +67,17 @@ public class Consumer1Test {
 						+ "                    \"price\": 17000.0\n" + "                }\n" + "            ]\n"
 						+ "        }\n" + "    ]\n" + "}")
 
-		.toPact();
+				.toPact();
 
 	}
+
 	@Pact(consumer = "myconsumerpact") // will default to the provider name from mockProvider in Rule
 
-	public RequestResponsePact defineExpectationWithStateNewProduct(PactDslWithProvider builder) {
+	public RequestResponsePact defineExpectationWithStateNewManfacturer(PactDslWithProvider builder) {
 
 		return builder.given("SomeState").uponReceiving("get product list by Xiaomi")
-		.path("/app/manufacturers/name/Xiaomi").method("GET")
-        .willRespondWith().status(200)
-        .body("{\n" + "    \"manufacturerVOs\": [\n" + "        {\n"
+				.path("/app/manufacturers/name/Xiaomi").method("GET").willRespondWith().status(200)
+				.body("{\n" + "    \"manufacturerVOs\": [\n" + "        {\n"
 						+ "            \"manufacturerId\": \"502\",\n"
 						+ "            \"manufacturerName\": \"Xiaomi\",\n"
 						+ "            \"manufacturerAddress\": \"India\",\n" + "            \"productsList\": [\n"
@@ -89,27 +87,64 @@ public class Consumer1Test {
 						+ "                    \"price\": 10000.0\n" + "                }\n" + "            ]\n"
 						+ "        }\n" + "    ]\n" + "}")
 
-		.toPact();
-}
+				.toPact();
+	}
+
+	@Pact(consumer = "myconsumerpact") // will default to the provider name from mockProvider in Rule
+	public RequestResponsePact defineExpectationProduct(PactDslWithProvider builder) {
+		return builder.uponReceiving("get product list by productid 102").path("/app/products/102").method("GET")
+				.willRespondWith().status(200)
+				.body("{\n" + " \"productsVOs\": [\n" + " {\n" + " \"productId\": \"102\",\n"
+						+ "   \"productName\": \"Samsung\",\n" + "  \"productType\": \"Mobile\",\n"
+						+ "    \"price\":  17000.0 ,\n" + "     \"manufacturerId\": \"501\",\n"
+						+ "   \"manufacturerName\": \"Samsung\",\n" + "  \"manufacturerAddress\": \"India\"\n" + "  }\n"
+						+ "  ]\n" + "}")
+				.toPact();
+	}
+	@Pact(consumer = "myconsumerpact") // will default to the provider name from mockProvider in Rule
+	public RequestResponsePact defineExpectationWithStateNewProduct(PactDslWithProvider builder) {
+		return builder.given("Oppo").uponReceiving("get product list by productid 105").path("/app/products/105").method("GET")
+				.willRespondWith().status(200)
+				.body("{\n" + " \"productsVOs\": [\n" + " {\n" + " \"productId\": \"105\",\n"
+						+ "   \"productName\": \"Oppo Reno Pro\",\n" + "  \"productType\": \"Mobile\",\n"
+						+ "    \"price\":  14000.0 ,\n" + "     \"manufacturerId\": \"504\",\n"
+						+ "   \"manufacturerName\": \"Oppo\",\n" + "  \"manufacturerAddress\": \"Uk\"\n" + "  }\n"
+						+ "  ]\n" + "}")
+				.toPact();
+	}
+	
 
 	@Test
-    @PactVerification(fragment = "defineExpectation")
+	@PactVerification(fragment = "defineExpectation")
 	public void test() throws IOException {
-        Assert.assertTrue(consumerService.getProductList("Apple").isPresent());
+		Assert.assertTrue(consumerService.getProductList("Apple").isPresent());
 	}
 
 	@Test
-    @PactVerification(fragment = "defineExpectationWithState")
-    public void runTestWithState() throws IOException {
-        Assert.assertTrue(consumerService.getProductList("Samsung").isPresent());
+	@PactVerification(fragment = "defineExpectationWithState")
+	public void runTestWithState() throws IOException {
+		Assert.assertTrue(consumerService.getProductList("Samsung").isPresent());
 
+	}
+
+	@Test
+	@PactVerification(fragment = "defineExpectationWithStateNewManfacturer")
+	public void runTestWithStateNewManfacturer() throws IOException {
+		Assert.assertTrue(consumerService.getProductList("Xiaomi").isPresent());
+	}
+
+	@Test
+	@PactVerification(fragment = "defineExpectationProduct")
+	public void runTestStatewithProduct() throws IOException {
+		Assert.assertTrue(consumerService.getProductListById("102").isPresent());
 	}
 	
 	@Test
 	@PactVerification(fragment = "defineExpectationWithStateNewProduct")
-    public void runTestWithStateNewProduct() throws IOException {
-        Assert.assertTrue(consumerService.getProductList("Xiaomi").isPresent());
-    }
+	public void runTestStatewithNewProduct() throws IOException {
+		Assert.assertTrue(consumerService.getProductListById("105").isPresent());
+	}
+	
 }
 
 @TestConfiguration

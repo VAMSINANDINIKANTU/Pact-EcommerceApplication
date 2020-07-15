@@ -11,4 +11,5 @@ public interface ProductsRepository  extends  CrudRepository<ProductsPO, String>
 	public Optional<List<ProductsPO>> findAllByManufacturer(ManufacturerPO manufacturer);
 	public Optional<List<ProductsPO>> findAllByProductName(String prodname);
 	public Optional<List<ProductsPO>> findAllByProductType(String prodtype);
+	public Optional<List<ProductsPO>> findAllByProductId(String prodid);
 }

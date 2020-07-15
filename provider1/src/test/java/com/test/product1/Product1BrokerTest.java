@@ -50,4 +50,11 @@ public class Product1BrokerTest {
 		ecommerceservice.addManufacturer(new ManufacturerPO("502", "Xiaomi", "India", null));
 		ecommerceservice.addProduct(new ProductsPO("104", "Redmi", "Mobile", 10000.0, "502"));
 	}
+	@State("Oppo")
+	public void WithStateNewProductAndManfacturer() {
+		System.out.println("something with state Product");
+		EcommerceService ecommerceservice = applicationContext.getBean(EcommerceService.class);
+		ecommerceservice.addManufacturer(new ManufacturerPO("504", "Oppo", "Uk", null));
+		ecommerceservice.addProduct(new ProductsPO("105", "Oppo Reno Pro", "Mobile", 14000.0, "504"));
+	}
 }
