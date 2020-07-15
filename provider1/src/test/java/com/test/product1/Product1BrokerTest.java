@@ -25,7 +25,7 @@ public class Product1BrokerTest {
 
 	@TestTarget
 	public final Target target = new HttpTarget("http", "localhost", PORT);
-    private static ConfigurableApplicationContext applicationContext;
+        private static ConfigurableApplicationContext applicationContext;
 
 	@BeforeClass
 	public static void setVersion() {
@@ -39,7 +39,7 @@ public class Product1BrokerTest {
 	}
 
 	@AfterClass
-    public static void stop() {
+        public static void stop() {
 		SpringApplication.exit(applicationContext);
 	}
 
