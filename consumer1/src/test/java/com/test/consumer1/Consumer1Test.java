@@ -151,7 +151,7 @@ public class Consumer1Test {
 class MyTestConfig {
 
 	@Bean
-	public ProductConsumerService getStudentConsumerService() {
+	public ProductConsumerService getProductConsumerService() {
 		return new ProductConsumerService();
 	}
 
